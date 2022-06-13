@@ -43,6 +43,7 @@ dependencies:
   geolocator: ^8.2.1
   geocoding: ^2.0.4
   shared_preferences: ^2.0.15
+  carousel_slider: ^4.1.1
 
 
 dev_dependencies:
@@ -75,6 +76,7 @@ flutter:
     - images/photo_2022-06-08_19-09-43_4.jpg
     - images/photo_2022-06-08_19-09-43_5.jpg
     - images/photo_2022-06-08_19-09-43_6.jpg
+    - slider/
 
   fonts:
     - family: Signatra
