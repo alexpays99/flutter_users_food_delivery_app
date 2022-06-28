@@ -1,7 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:users_app/global/gloval.dart';
+import 'package:users_app/models/sellers.dart';
+import 'package:users_app/widgets/info_design.dart';
 import 'package:users_app/widgets/my_drawer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:users_app/widgets/progress_bar.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -69,8 +74,8 @@ class _HomeScreenState extends State<HomeScreen> {
         slivers: [
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Container(
+              padding: const EdgeInsets.all(16.0),
+              child: SizedBox(
                 height: MediaQuery.of(context).size.width * .3,
                 width: MediaQuery.of(context).size.height * .3,
                 child: CarouselSlider(
@@ -112,7 +117,36 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-          )
+          ),
+          SliverToBoxAdapter(
+            child: StreamBuilder<QuerySnapshot>(
+              stream:
+                  FirebaseFirestore.instance.collection('sellers').snapshots(),
+              builder: (context, snapshot) {
+                return !snapshot.hasData
+                    ? Center(
+                        child: circularProgress(),
+                      )
+                    : StaggeredGridView.countBuilder(
+                        shrinkWrap: true,
+                        crossAxisCount: 1,
+                        staggeredTileBuilder: (c) => const StaggeredTile.fit(1),
+                        itemBuilder: (context, index) {
+                          Sellers sellerModel = Sellers.fromJson(
+                            snapshot.data!.docs[index].data()!
+                                as Map<String, dynamic>,
+                          );
+
+                          return InfoDesignWidget(
+                            model: sellerModel,
+                            context: context,
+                          );
+                        },
+                        itemCount: snapshot.data!.docs.length,
+                      );
+              },
+            ),
+          ),
         ],
       ),
     );
