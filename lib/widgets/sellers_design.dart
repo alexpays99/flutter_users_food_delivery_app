@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:users_app/mainScreens/menus_screen.dart';
 import 'package:users_app/models/sellers.dart';
 
-class InfoDesignWidget extends StatefulWidget {
-  InfoDesignWidget({Key? key, this.model, this.context}) : super(key: key);
+class SellersDesignWidget extends StatefulWidget {
+  SellersDesignWidget({Key? key, this.model, this.context}) : super(key: key);
 
   Sellers? model;
   BuildContext? context;
 
   @override
-  State<InfoDesignWidget> createState() => _InfoDesignWidgetState();
+  State<SellersDesignWidget> createState() => _SellersDesignWidgetState();
 }
 
-class _InfoDesignWidgetState extends State<InfoDesignWidget> {
+class _SellersDesignWidgetState extends State<SellersDesignWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (c) => MenusScreen(model: widget.model)));
+      },
       splashColor: Colors.amber,
       child: Padding(
         padding: const EdgeInsets.all(5.0),
@@ -33,12 +40,12 @@ class _InfoDesignWidgetState extends State<InfoDesignWidget> {
                 height: 210.0,
                 fit: BoxFit.cover,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 1,
               ),
               Text(
                 widget.model!.sellerName!,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.cyan,
                   fontSize: 20,
                   fontFamily: 'Train',
@@ -46,7 +53,7 @@ class _InfoDesignWidgetState extends State<InfoDesignWidget> {
               ),
               Text(
                 widget.model!.sellerEmail!,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.grey,
                   fontSize: 12,
                   fontFamily: 'Train',

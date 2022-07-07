@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:users_app/global/gloval.dart';
 import 'package:users_app/models/sellers.dart';
-import 'package:users_app/widgets/info_design.dart';
+import 'package:users_app/widgets/sellers_design.dart';
 import 'package:users_app/widgets/my_drawer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:users_app/widgets/progress_bar.dart';
@@ -128,6 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: circularProgress(),
                       )
                     : StaggeredGridView.countBuilder(
+                        physics: const ScrollPhysics(),
                         shrinkWrap: true,
                         crossAxisCount: 1,
                         staggeredTileBuilder: (c) => const StaggeredTile.fit(1),
@@ -137,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 as Map<String, dynamic>,
                           );
 
-                          return InfoDesignWidget(
+                          return SellersDesignWidget(
                             model: sellerModel,
                             context: context,
                           );
