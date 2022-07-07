@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:users_app/global/gloval.dart';
 import 'package:users_app/models/items.dart';
+import 'package:users_app/models/menus.dart';
 import 'package:users_app/widgets/items_design.dart';
 import 'package:users_app/widgets/my_drawer.dart';
 import 'package:users_app/widgets/progress_bar.dart';
 import 'package:users_app/widgets/text_widget_header.dart';
 
 class ItemsScreen extends StatefulWidget {
-  const ItemsScreen({Key? key}) : super(key: key);
+  final Menus? model;
+
+  ItemsScreen({Key? key, this.model}) : super(key: key);
 
   @override
   State<ItemsScreen> createState() => _ItemsScreenState();
@@ -81,14 +84,18 @@ class _ItemsScreenState extends State<ItemsScreen> {
         slivers: [
           SliverPersistentHeader(
             pinned: true,
-            delegate: TextWidgetHeader(title: 'My Menus'),
+            delegate: TextWidgetHeader(
+              title: 'Items 0f ' + widget.model!.menuTitle.toString(),
+            ),
           ),
           SliverToBoxAdapter(
             child: StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
                   .collection('sellers')
-                  .doc(sharedPreferences!.getString('uid'))
+                  .doc(widget.model!.sellerUID)
                   .collection('menus')
+                  .doc(widget.model!.menuID)
+                  .collection('items')
                   .orderBy('publishedDate', descending: true)
                   .snapshots(),
               builder: (context, snapshot) {

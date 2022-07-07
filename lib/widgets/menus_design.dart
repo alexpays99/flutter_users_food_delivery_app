@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:users_app/mainScreens/items_screen.dart';
 import 'package:users_app/models/menus.dart';
 
 class MenusDesignWidget extends StatefulWidget {
@@ -15,6 +16,12 @@ class _MenusDesignWidgetState extends State<MenusDesignWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (c) => ItemsScreen(model: widget.model)));
+      },
       splashColor: Colors.amber,
       child: Padding(
         padding: const EdgeInsets.all(5.0),
