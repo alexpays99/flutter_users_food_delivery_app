@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:users_app/mainScreens/item_detail_screen.dart';
 import 'package:users_app/models/items.dart';
-import 'package:users_app/models/menus.dart';
 
 class ItemsDesignWidget extends StatefulWidget {
   ItemsDesignWidget({Key? key, this.model, this.context}) : super(key: key);
@@ -16,6 +16,14 @@ class _ItemsDesignWidgetState extends State<ItemsDesignWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (c) => ItemDetailScreen(model: widget.model),
+          ),
+        );
+      },
       splashColor: Colors.amber,
       child: Padding(
         padding: const EdgeInsets.all(5.0),
