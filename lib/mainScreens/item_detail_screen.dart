@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:users_app/assistantMethods/assistant_methods.dart';
 import 'package:users_app/models/items.dart';
 import 'package:users_app/widgets/app_bar.dart';
 import 'package:number_inc_dec/number_inc_dec.dart';
@@ -70,7 +71,11 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
           Center(
             child: InkWell(
               onTap: () {
-                //add to cart
+                int itemCounter = int.parse(counterTextEditingController.text);
+                // 1. checkin if item already exist in cart
+
+                //2. add to cart
+                addItemToCart(widget.model!.itemID!, context, itemCounter);
               },
               child: Container(
                 decoration: const BoxDecoration(
