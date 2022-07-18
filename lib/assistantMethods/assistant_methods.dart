@@ -5,7 +5,7 @@ import 'package:users_app/assistantMethods/cart_item_counter.dart';
 import 'package:users_app/global/gloval.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-/// separates foodItemIDs from the userCart list and returns new list of foodItemIDs
+/// separates foodItemIDs from the userCart list and returns the list of foodItemIDs
 separateItemIDs() {
   List<String> separateItemIDsList = [], defaultItemList;
   int i = 0;
@@ -54,4 +54,29 @@ addItemToCart(String? foodItemId, BuildContext context, int itemCounter) {
     Provider.of<CartItemCounter>(context, listen: false)
         .displayCartListItemsNumber();
   });
+}
+
+separateItemQuantities() {
+  List<int> separateItemQuantitysList = [];
+  List<String> defaultItemList;
+  int i = 1;
+
+  defaultItemList = sharedPreferences!.getStringList('userCart')!;
+
+  for (i; i < defaultItemList.length; i++) {
+    String item = defaultItemList[i].toString(); //527123123:7
+    List<String> listItemCharacters = item.split(':').toList(); //:7
+
+    var quantityNumber =
+        int.parse(listItemCharacters[1].toString()); //7 ([0]=:, [1]=7)
+
+    print('\nThis is Quantity Number = ' + quantityNumber.toString());
+
+    separateItemQuantitysList.add(quantityNumber);
+  }
+
+  print('\nThis is Quantity List now = ');
+  print(separateItemQuantitysList);
+
+  return separateItemQuantitysList;
 }

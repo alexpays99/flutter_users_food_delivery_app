@@ -1,19 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:users_app/global/gloval.dart';
 import 'package:users_app/models/items.dart';
 import 'package:users_app/models/menus.dart';
 import 'package:users_app/widgets/app_bar.dart';
 import 'package:users_app/widgets/items_design.dart';
-import 'package:users_app/widgets/my_drawer.dart';
 import 'package:users_app/widgets/progress_bar.dart';
 import 'package:users_app/widgets/text_widget_header.dart';
 
 class ItemsScreen extends StatefulWidget {
   final Menus? model;
 
-  ItemsScreen({Key? key, this.model}) : super(key: key);
+  const ItemsScreen({Key? key, this.model}) : super(key: key);
 
   @override
   State<ItemsScreen> createState() => _ItemsScreenState();
@@ -23,7 +21,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(),
+      appBar: MyAppBar(sellerUID: widget.model!.sellerUID),
       body: CustomScrollView(
         slivers: [
           SliverPersistentHeader(

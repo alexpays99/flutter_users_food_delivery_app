@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:users_app/assistantMethods/cart_item_counter.dart';
+import 'package:users_app/mainScreens/cart_screen.dart';
 
 class MyAppBar extends StatefulWidget with PreferredSizeWidget {
   final PreferredSizeWidget? bottom;
-  MyAppBar({Key? key, this.bottom}) : super(key: key);
+  final String? sellerUID;
+
+  MyAppBar({Key? key, this.bottom, this.sellerUID}) : super(key: key);
 
   @override
   State<MyAppBar> createState() => _MyAppBarState();
@@ -54,6 +57,12 @@ class _MyAppBarState extends State<MyAppBar> {
               IconButton(
                 onPressed: () {
                   //send user to cart screen
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (c) => CartScreen(sellerUID: widget.sellerUID),
+                    ),
+                  );
                 },
                 icon: const Icon(
                   Icons.shopping_cart,
