@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:users_app/assistantMethods/assistant_methods.dart';
 import 'package:users_app/models/items.dart';
 import 'package:users_app/widgets/app_bar.dart';
@@ -72,10 +73,22 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
             child: InkWell(
               onTap: () {
                 int itemCounter = int.parse(counterTextEditingController.text);
-                // 1. checkin if item already exist in cart
+                List<String> separateItemIDsList = separateItemIDs();
 
-                //2. add to cart
-                addItemToCart(widget.model!.itemID!, context, itemCounter);
+                // 1. checkin if item already exist in cart
+                separateItemIDsList.contains(widget.model!.itemID)
+                    ? Fluttertoast.showToast(
+                        msg: "Item is already in Cart",
+                        // toastLength: Toast.LENGTH_SHORT,
+                        // gravity: ToastGravity.CENTER,
+                        // timeInSecForIosWeb: 1,
+                        // backgroundColor: Colors.red,
+                        // textColor: Colors.white,
+                        // fontSize: 16.0,
+                      )
+                    :
+                    //2. add to cart
+                    addItemToCart(widget.model!.itemID!, context, itemCounter);
               },
               child: Container(
                 decoration: const BoxDecoration(
